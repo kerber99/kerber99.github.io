@@ -4,242 +4,321 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | kerber99</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --bg: #050505;
+            --surface: #111111;
+            --surface-hover: #161616;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: #27272a;
         }
-        * {
-            box-sizing: border-box;
-        }
+
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
+            background-color: var(--bg);
             color: var(--text-main);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
-        /* Header styling */
+
+        /* Ambient Glow Background */
+        .ambient-light {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            width: 70vw;
+            height: 70vw;
+            max-width: 800px;
+            max-height: 800px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, rgba(0,0,0,0) 60%);
+            z-index: -1;
+            filter: blur(60px);
+            animation: pulse-light 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-light {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        }
+
         header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: #ffffff;
-            padding: 4.5rem 1rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 60%);
-            animation: pulse 10s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-        .profile-img {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-        .profile-img:hover {
-            transform: scale(1.05);
-        }
-        h1 {
-            margin: 0;
-            font-size: 2.7rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-        }
-        .subtitle {
-            margin: 0.5rem 0 2rem 0;
-            font-size: 1.15rem;
-            color: #cbd5e1;
-            font-weight: 300;
-        }
-        .social-links a {
-            color: #ffffff;
-            text-decoration: none;
-            background: rgba(255,255,255,0.1);
-            padding: 0.6rem 1.5rem;
-            border-radius: 9999px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .social-links a:hover {
-            background: #ffffff;
-            color: #0f172a;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1000px;
-            margin: 3.5rem auto;
-            padding: 0 1.5rem;
-        }
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: #1e293b;
-        }
-
-        /* Grid & Cards */
-        .repo-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.8rem;
-        }
-        .repo-card {
-            background: var(--card-bg);
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.8rem;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12vh 20px 6vh;
+            text-align: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        
+        /* Animated spinning border for avatar */
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            top: -6px; left: -6px; right: -6px; bottom: -6px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% 200%;
+            border-radius: 50%;
+            z-index: -1;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 6px solid var(--bg);
+            object-fit: cover;
+            background-color: var(--bg);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1.5px;
+        }
+
+        /* Typewriter Subtitle */
+        .typewriter-container {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            font-size: 1.15rem;
+            margin-top: 1.2rem;
+            display: inline-block;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0; /* starts at 0 for animation */
+            animation: typing 3s steps(40, end) forwards, blink-caret .8s step-end infinite;
+        }
+
+        @keyframes typing { to { width: 380px; } } /* Magic number width for the exact text */
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary); } }
+
+        @media (max-width: 500px) {
+            .typewriter-container { font-size: 0.9rem; animation: typing-mobile 3s steps(40, end) forwards, blink-caret .8s step-end infinite; }
+            @keyframes typing-mobile { to { width: 300px; } }
+            h1 { font-size: 2.5rem; }
+        }
+
+        .social-links {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #ffffff;
+            color: #000000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+        }
+
+        /* Bento Grid */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
-        .repo-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1);
-            border-color: #cbd5e1;
+
+        /* Top colored border that appears on hover */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
         }
-        .repo-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 0 0 0.8rem 0;
-            color: var(--text-main);
+
+        .card:hover {
+            transform: translateY(-5px);
+            background-color: var(--surface-hover);
+            border-color: #3f3f46;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), 0 0 30px rgba(59, 130, 246, 0.1);
         }
-        .repo-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 0 0 1.5rem 0;
-            flex-grow: 1;
+
+        .card:hover::before {
+            opacity: 1;
         }
-        .repo-meta {
+
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        .tag-lang {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: #f1f5f9;
-            padding: 0.4rem 0.7rem;
-            border-radius: 8px;
-            color: #334155;
-        }
-        .tag-lang.python::before { content: '🔵'; }
-        .tag-lang.js::before { content: '🟡'; }
-        
-        .repo-link {
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-            padding: 0.75rem 0;
-            background-color: var(--primary);
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: background 0.2s, transform 0.1s;
-        }
-        .repo-link:hover {
-            background-color: var(--primary-hover);
-        }
-        .repo-link:active {
-            transform: scale(0.98);
+            margin-bottom: 1.2rem;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2.5rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 4rem;
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            color: #ffffff;
         }
+
+        .card-desc {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #d1d5db;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge.python span { color: #3b82f6; }
+        .badge.js span { color: #eab308; }
+
+        .btn {
+            background: transparent;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--primary);
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
     </style>
 </head>
 <body>
 
+<!-- Luz de Fundo Pulsante -->
+<div class="ambient-light"></div>
+
 <header>
-    <div class="header-content">
-        <img src="https://avatars.githubusercontent.com/u/276702295?v=4" alt="kerber99" class="profile-img">
-        <h1>Olá, eu sou kerber99</h1>
-        <p class="subtitle">Desenvolvedor Focado em Automação e Soluções Inteligentes</p>
-        <div class="social-links">
-            <a href="https://github.com/kerber99" target="_blank">Visitar meu Perfil no GitHub</a>
-        </div>
+    <div class="avatar-container">
+        <img src="https://avatars.githubusercontent.com/u/276702295?v=4" alt="kerber99" class="avatar">
+    </div>
+    <h1>kerber99</h1>
+    <div class="typewriter-container">
+        > Desenvolvedor Backend & Automação_
+    </div>
+    <div class="social-links">
+        <a href="https://github.com/kerber99" target="_blank" class="social-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+        </a>
     </div>
 </header>
 
 <div class="container">
-    <h2 class="section-title">Meus Projetos em Destaque</h2>
-    <div class="repo-list">
+    <div class="grid">
         
-        <div class="repo-card">
-            <h2 class="repo-name">inbox-zero-express-</h2>
-            <p class="repo-desc">Agente autônomo com Inteligência Artificial (Gemini 2.5) para classificar, priorizar e organizar sua caixa de e-mails automaticamente.</p>
-            <div class="repo-meta">
-                <span class="tag-lang python">Python</span>
-                <span>⭐ 1</span>
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">inbox-zero-express-</h2>
             </div>
-            <a href="https://github.com/kerber99/inbox-zero-express-" class="repo-link" target="_blank">Acessar Código e Documentação</a>
+            <p class="card-desc">Agente autônomo com Inteligência Artificial (Gemini 2.5). Classifica, prioriza e organiza caixas de e-mail automaticamente.</p>
+            <div class="card-footer">
+                <div class="badge python"><span>●</span> Python</div>
+                <a href="https://github.com/kerber99/inbox-zero-express-" class="btn" target="_blank">Acessar</a>
+            </div>
         </div>
 
-        <div class="repo-card">
-            <h2 class="repo-name">projeto-william</h2>
-            <p class="repo-desc">Sistema de automação em Python e PowerShell para monitoramento do nível de rios (Defesa Civil) com integração direta e atualização no Google Sheets.</p>
-            <div class="repo-meta">
-                <span class="tag-lang python">Python</span>
-                <span>⭐ 1</span>
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">projeto-william</h2>
             </div>
-            <a href="https://github.com/kerber99/projeto-william" class="repo-link" target="_blank">Acessar Código e Documentação</a>
+            <p class="card-desc">Sistema de automação com Python e PowerShell. Monitora níveis de rios para a Defesa Civil com integração no Google Sheets.</p>
+            <div class="card-footer">
+                <div class="badge python"><span>●</span> Python</div>
+                <a href="https://github.com/kerber99/projeto-william" class="btn" target="_blank">Acessar</a>
+            </div>
         </div>
 
-        <div class="repo-card">
-            <h2 class="repo-name">academy-bbdi</h2>
-            <p class="repo-desc">Portal de treinamentos interativo, contendo scripts automatizados de extração de dados e manuais técnicos aprofundados sobre hardware.</p>
-            <div class="repo-meta">
-                <span class="tag-lang js">JavaScript</span>
-                <span>⭐ 1</span>
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">academy-bbdi</h2>
             </div>
-            <a href="https://github.com/kerber99/academy-bbdi" class="repo-link" target="_blank">Acessar Código e Documentação</a>
+            <p class="card-desc">Portal de treinamentos interativo e scripts automatizados de extração de dados (PDF/Word) sobre manutenção de hardware.</p>
+            <div class="card-footer">
+                <div class="badge js"><span>●</span> JavaScript</div>
+                <a href="https://github.com/kerber99/academy-bbdi" class="btn" target="_blank">Acessar</a>
+            </div>
         </div>
 
     </div>
 </div>
 
-<footer>
-    <p>&copy; 2026 kerber99. Criado para compartilhar conhecimento e código.</p>
+<footer style="text-align: center; color: #52525b; padding: 4rem 0 2rem; font-size: 0.9rem;">
+    <p>Criado em 2026. Design & Código por kerber99.</p>
 </footer>
 
 </body>
