@@ -107,17 +107,17 @@
             border-right: 2px solid var(--primary);
             white-space: nowrap;
             overflow: hidden;
-            width: 0; /* starts at 0 for animation */
-            animation: typing 3s steps(40, end) forwards, blink-caret .8s step-end infinite;
+            width: 0;
+            animation: typing 3s steps(55, end) forwards, blink-caret .8s step-end infinite;
         }
 
-        @keyframes typing { to { width: 520px; } } /* Adjusted for longer text */
+        @keyframes typing { to { width: 57ch; } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary); } }
 
         @media (max-width: 500px) {
-            .typewriter-container { font-size: 0.9rem; animation: typing-mobile 3s steps(50, end) forwards, blink-caret .8s step-end infinite; }
-            @keyframes typing-mobile { to { width: 440px; } }
-            h1 { font-size: 2.5rem; }
+            .typewriter-container { font-size: 0.85rem; animation: typing-mobile 3s steps(55, end) forwards, blink-caret .8s step-end infinite; }
+            @keyframes typing-mobile { to { width: 57ch; } }
+            h1 { font-size: 2.2rem; }
         }
 
         .social-links {
