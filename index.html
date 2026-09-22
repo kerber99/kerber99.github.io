@@ -3,137 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio de kerber99</title>
+    <title>Portfólio | kerber99</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
         }
+        /* Header styling */
         header {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 3rem 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 4.5rem 1rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        header img {
-            width: 100px;
-            height: 100px;
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 60%);
+            animation: pulse 10s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        .profile-img {
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            margin-bottom: 1rem;
-            border: 3px solid #ecf0f1;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
         }
-        header h1 {
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.7rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
         }
-        header p {
-            margin: 0.5rem 0 0;
-            font-size: 1.2rem;
-            opacity: 0.8;
+        .subtitle {
+            margin: 0.5rem 0 2rem 0;
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            font-weight: 300;
         }
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            background: rgba(255,255,255,0.1);
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .social-links a:hover {
+            background: #ffffff;
+            color: #0f172a;
+        }
+
+        /* Container */
         .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            max-width: 1000px;
+            margin: 3.5rem auto;
+            padding: 0 1.5rem;
         }
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        /* Grid & Cards */
         .repo-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
         }
         .repo-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 1.5rem;
-            transition: transform 0.2s;
+            background: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.8rem;
             display: flex;
             flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
         .repo-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1);
+            border-color: #cbd5e1;
         }
         .repo-name {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin: 0 0 0.5rem 0;
-        }
-        .repo-name a {
-            text-decoration: none;
-            color: #2980b9;
-        }
-        .repo-name a:hover {
-            text-decoration: underline;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 0.8rem 0;
+            color: var(--text-main);
         }
         .repo-desc {
             font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 1rem;
+            color: var(--text-muted);
+            margin: 0 0 1.5rem 0;
             flex-grow: 1;
         }
         .repo-meta {
-            font-size: 0.85rem;
-            color: #7f8c8d;
             display: flex;
             justify-content: space-between;
-            border-top: 1px solid #eee;
-            padding-top: 0.8rem;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
+        .tag-lang {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #f1f5f9;
+            padding: 0.4rem 0.7rem;
+            border-radius: 8px;
+            color: #334155;
+        }
+        .tag-lang.python::before { content: '🔵'; }
+        .tag-lang.js::before { content: '🟡'; }
+        
+        .repo-link {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 0.75rem 0;
+            background-color: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .repo-link:hover {
+            background-color: var(--primary-hover);
+        }
+        .repo-link:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
-            background: #2c3e50;
-            color: #ecf0f1;
-            margin-top: 3rem;
+            padding: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 4rem;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="https://avatars.githubusercontent.com/u/276702295?v=4" alt="kerber99">
-    <h1>Portfólio</h1>
-    <p>Projetos desenvolvidos por @kerber99 no GitHub</p>
+    <div class="header-content">
+        <img src="https://avatars.githubusercontent.com/u/276702295?v=4" alt="kerber99" class="profile-img">
+        <h1>Olá, eu sou kerber99</h1>
+        <p class="subtitle">Desenvolvedor Focado em Automação e Soluções Inteligentes</p>
+        <div class="social-links">
+            <a href="https://github.com/kerber99" target="_blank">Visitar meu Perfil no GitHub</a>
+        </div>
+    </div>
 </header>
 
 <div class="container">
+    <h2 class="section-title">Meus Projetos em Destaque</h2>
     <div class="repo-list">
         
         <div class="repo-card">
-            <h2 class="repo-name"><a href="https://github.com/kerber99/academy-bbdi" target="_blank">academy-bbdi</a></h2>
-            <p class="repo-desc">Portal de treinamentos, manuais técnicos de hardware de notebooks e scripts de extração de dados.</p>
-            <div class="repo-meta">
-                <span>🟡 JavaScript</span>
-                <span>⭐ 1</span>
-            </div>
-        </div>
-
-        <div class="repo-card">
-            <h2 class="repo-name"><a href="https://github.com/kerber99/inbox-zero-express-" target="_blank">inbox-zero-express-</a></h2>
+            <h2 class="repo-name">inbox-zero-express-</h2>
             <p class="repo-desc">Agente autônomo com Inteligência Artificial (Gemini 2.5) para classificar, priorizar e organizar sua caixa de e-mails automaticamente.</p>
             <div class="repo-meta">
-                <span>🔵 Python</span>
+                <span class="tag-lang python">Python</span>
                 <span>⭐ 1</span>
             </div>
+            <a href="https://github.com/kerber99/inbox-zero-express-" class="repo-link" target="_blank">Acessar Código e Documentação</a>
         </div>
 
         <div class="repo-card">
-            <h2 class="repo-name"><a href="https://github.com/kerber99/projeto-william" target="_blank">projeto-william</a></h2>
-            <p class="repo-desc">Sistema de automação em Python e PowerShell para monitoramento do nível de rios (Defesa Civil) com integração em planilhas.</p>
+            <h2 class="repo-name">projeto-william</h2>
+            <p class="repo-desc">Sistema de automação em Python e PowerShell para monitoramento do nível de rios (Defesa Civil) com integração direta e atualização no Google Sheets.</p>
             <div class="repo-meta">
-                <span>🔵 Python</span>
+                <span class="tag-lang python">Python</span>
                 <span>⭐ 1</span>
             </div>
+            <a href="https://github.com/kerber99/projeto-william" class="repo-link" target="_blank">Acessar Código e Documentação</a>
+        </div>
+
+        <div class="repo-card">
+            <h2 class="repo-name">academy-bbdi</h2>
+            <p class="repo-desc">Portal de treinamentos interativo, contendo scripts automatizados de extração de dados e manuais técnicos aprofundados sobre hardware.</p>
+            <div class="repo-meta">
+                <span class="tag-lang js">JavaScript</span>
+                <span>⭐ 1</span>
+            </div>
+            <a href="https://github.com/kerber99/academy-bbdi" class="repo-link" target="_blank">Acessar Código e Documentação</a>
         </div>
 
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 kerber99.</p>
+    <p>&copy; 2026 kerber99. Criado para compartilhar conhecimento e código.</p>
 </footer>
 
 </body>
